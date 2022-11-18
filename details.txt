@@ -1,2 +1,6 @@
 Sandwich Builder:
 Choose ingredients to make a Sandwich!
+
+Plans:
+-Rating algorithm for sandwiches with numbers
+-Python API to serve pictures of sandwiches made by user
