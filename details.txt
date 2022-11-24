@@ -2,7 +2,8 @@ Sandwich Builder:
 Choose ingredients to make a Sandwich!
 
 Plans:
--Rating algorithm for sandwiches with numbers
+-̶R̶a̶t̶i̶n̶g̶ a̶l̶g̶o̶r̶i̶t̶h̶m̶ f̶o̶r̶ s̶a̶n̶d̶w̶i̶c̶h̶e̶s̶ w̶i̶t̶h̶ n̶u̶m̶b̶e̶r̶s̶
 -Python API to serve pictures of sandwiches made by user
--Add start menu for Building sandwiches
+-̶A̶d̶d̶ s̶t̶a̶r̶t̶ m̶e̶n̶u̶ f̶o̶r̶ B̶u̶i̶l̶d̶i̶n̶g̶ s̶a̶n̶d̶w̶i̶c̶h̶e̶s̶
 -Possibly add drink choices
+-figure out whether or not to make custom combinations for sandwiches. We are talking exactly 2002 different combinations!
