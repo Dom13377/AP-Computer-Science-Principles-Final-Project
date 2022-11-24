@@ -6,4 +6,4 @@ Plans:
 -Python API to serve pictures of sandwiches made by user
 -̶A̶d̶d̶ s̶t̶a̶r̶t̶ m̶e̶n̶u̶ f̶o̶r̶ B̶u̶i̶l̶d̶i̶n̶g̶ s̶a̶n̶d̶w̶i̶c̶h̶e̶s̶
 -Possibly add drink choices
--figure out whether or not to make custom combinations for sandwiches. We are talking exactly 2002 different combinations!
+-figure out whether or not to make custom combinations for sandwiches. We are talking exactly 2002 different combinations! Kill me now...
