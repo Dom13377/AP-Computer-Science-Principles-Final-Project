@@ -52,6 +52,7 @@ public class ApProject {
             }
 
             else if (command.equals("build")){
+                String rating = "";
                 Double price = build_sandwich(ingredients, scanobject);
                 if (price == 1000.){
                     program_bool = exit(program_bool);
@@ -60,24 +61,25 @@ public class ApProject {
                     //add price ranges
                     if (price >= 8.50 && price <= 9.50){
                         System.out.println("Ah what a robust sandwich! Inexpensive yet tasty!");
-                        System.out.println("Total: " + ConsoleColors.GREEN + "$" + String.format("%.2f",price) + ConsoleColors.RESET + "\n");
+                        rating = "7/10";
                     }
                     else if (price >= 9.51 && price <= 11.50){
                         System.out.println("This would be exquisite after a long day of hard work!");
-                        System.out.println("Total: " + ConsoleColors.GREEN + "$" + String.format("%.2f",price) + ConsoleColors.RESET + "\n");
+                        rating = "8/10";
                     }
                     else if (price >= 11.51 && price <= 12.50){
                         System.out.println("Delicous!");
-                        System.out.println("Total: " + ConsoleColors.GREEN + "$" + String.format("%.2f",price) + ConsoleColors.RESET + "\n");
+                        rating = "8.5/10";
                     }
                     else if (price >= 12.51 && price <= 13.50){
                         System.out.println("Nicely done, this sandwich is obviously expertly crafted!");
-                        System.out.println("Total: " + ConsoleColors.GREEN + "$" + String.format("%.2f",price) + ConsoleColors.RESET + "\n");
+                        rating = "9/10";
                     }
                     else if (price >= 13.51 && price <= 14.50){
                         System.out.println("There are no words to describe this masterpiece fit for a King!");
-                        System.out.println("Total: " + ConsoleColors.GREEN + "$" + String.format("%.2f",price) + ConsoleColors.RESET + "\n");
+                        rating = "10/10";
                     }
+                    System.out.println("Rating: " + ConsoleColors.GREEN + rating + ConsoleColors.RESET + "\n");
                 }
             }
             
