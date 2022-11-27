@@ -23,7 +23,7 @@ public class ApProject {
         System.out.println(ConsoleColors.RESET + "or Type " + ConsoleColors.BLUE + "\"build\"" + ConsoleColors.RESET + " to build a sandwich.\n");
         
         //Ingredient Array
-        List<String> raw_ingredients = Arrays.asList("ham", "colby jack", "mozzarella", "cheddar", "lettuce", "white bread", "mayo", "roast beef", "chicken", "wheat bread", "rosemary bread", "ranch dressing", "guacamole");
+        List<String> raw_ingredients = Arrays.asList("ham", "colby jack", "mozzarella", "cheddar", "white bread", "mayo", "roast beef", "chicken", "wheat bread", "rosemary bread", "ranch dressing", "guacamole");
         String ingredients = String.join(", ", raw_ingredients);
         
         //Create Scanner Object
@@ -52,14 +52,31 @@ public class ApProject {
             }
 
             else if (command.equals("build")){
-                int rating = build_sandwich(ingredients, scanobject);
-                if (rating == 1000){
+                Double price = build_sandwich(ingredients, scanobject);
+                if (price == 1000.){
                     program_bool = exit(program_bool);
                 }
                 else {
-                    //add rating ranges
-                    if (rating >= 60 && rating <= 70){
-                        System.out.println("\nNicely done, this sandwich is obviously expertly crafted!\n");
+                    //add price ranges
+                    if (price >= 8.50 && price <= 9.50){
+                        System.out.println("Ah what a robust sandwich! Inexpensive yet tasty!");
+                        System.out.println("Total: " + ConsoleColors.GREEN + "$" + String.format("%.2f",price) + ConsoleColors.RESET + "\n");
+                    }
+                    else if (price >= 9.51 && price <= 11.50){
+                        System.out.println("This would be exquisite after a long day of hard work!");
+                        System.out.println("Total: " + ConsoleColors.GREEN + "$" + String.format("%.2f",price) + ConsoleColors.RESET + "\n");
+                    }
+                    else if (price >= 11.51 && price <= 12.50){
+                        System.out.println("Delicous!");
+                        System.out.println("Total: " + ConsoleColors.GREEN + "$" + String.format("%.2f",price) + ConsoleColors.RESET + "\n");
+                    }
+                    else if (price >= 12.51 && price <= 13.50){
+                        System.out.println("Nicely done, this sandwich is obviously expertly crafted!");
+                        System.out.println("Total: " + ConsoleColors.GREEN + "$" + String.format("%.2f",price) + ConsoleColors.RESET + "\n");
+                    }
+                    else if (price >= 13.51 && price <= 14.50){
+                        System.out.println("There are no words to describe this masterpiece fit for a King!");
+                        System.out.println("Total: " + ConsoleColors.GREEN + "$" + String.format("%.2f",price) + ConsoleColors.RESET + "\n");
                     }
                 }
             }
@@ -70,64 +87,119 @@ public class ApProject {
         }
     }
 
-    //Build and Rate Sandwich
-    public static int build_sandwich(String ingredients, Scanner scanobject){
-        int rating = 0;
-        Map<String, Integer> ratingmap = Map.ofEntries(
-            entry("ham", 20),
-            entry("colby jack", 10),
-            entry("cheddar", 10),
-            entry("mozzarella", 10),
-            entry( "lettuce", 2),
-            entry( "white bread", 15),
-            entry( "mayo", 5),
-            entry( "roast beef", 20),
-            entry( "chicken", 20),
-            entry( "wheat bread", 15),
-            entry("rosemary bread", 15),
-            entry( "ranch dressing", 5),
-            entry( "guacamole", 5),
-            entry( "", 2)
+    //Build and Price Sandwich
+    public static Double build_sandwich(String ingredients, Scanner scanobject){
+        Double price = 0.00;
+        Map<String, Double> pricemap = Map.ofEntries(
+            entry( "white bread", 2.00),
+            entry( "wheat bread", 1.50),
+            entry("rosemary bread", 2.50),
+            entry("ham", 4.00),
+            entry( "chicken", 3.50),
+            entry( "roast beef", 5.00),
+            entry("cheddar", 1.00),
+            entry("colby jack", 1.50),
+            entry("mozzarella", 2.00),
+            entry( "mayo", 1.00),
+            entry( "ranch dressing", 1.50),
+            entry( "guacamole", 2.50)
         );
         //write main builder
         System.out.println("Welcome to the Sandwich Builder! You may choose up to 5 layers of any combination of ingredients.");
-        System.out.println(ConsoleColors.CYAN + "*Type exit to quit or if you would like to skip a layer, just press enter when prompted*\n" + ConsoleColors.RESET);
-        System.out.println("Here are your ingredients for reference:\n" + ConsoleColors.YELLOW + ingredients + ConsoleColors.RESET);
-        System.out.print(ConsoleColors.RED + "\nBase Layer: " + ConsoleColors.RESET);
-        String layer1 = scanobject.nextLine();
-        if (layer1.equals("exit")){
-            return 1000;
+        System.out.println(ConsoleColors.CYAN + "*Type exit if you would like to quit*\n" + ConsoleColors.RESET);
+        System.out.println("Here are your ingredients for reference:\n" + ConsoleColors.YELLOW + ingredients + ConsoleColors.RESET + "\n");
+
+        //instantiate layer vars
+        String layer1 = null;
+        String layer2 = null;
+        String layer3 = null;
+        String layer4 = null;
+        String layer5 = null;
+
+        while (true){ 
+            System.out.print(ConsoleColors.RED + "Bread Layer: " + ConsoleColors.RESET);
+            layer1 = scanobject.nextLine();
+            if (layer1.equals("exit")){
+                return 1000.;
+            }
+            else if (layer1.equals("white bread") || layer1.equals("rosemary bread") || layer1.equals("wheat bread")) {
+                break;
+            }
+            else {
+                System.out.println("Please choose a bread!");
+                continue;
+            }
         }
-        System.out.print(ConsoleColors.RED + "Second Layer: " + ConsoleColors.RESET);
-        String layer2 = scanobject.nextLine();
-        if (layer2.equals("exit")){
-            return 1000;
+
+        while (true){
+            System.out.print(ConsoleColors.RED + "Meat Layer: " + ConsoleColors.RESET);
+            layer2 = scanobject.nextLine();
+            if (layer2.equals("exit")){
+                return 1000.;
+            }
+            else if (layer2.equals("ham") || layer2.equals("chicken") || layer2.equals("roast beef")){
+                break;
+            }
+            else{
+                System.out.println("Please choose a meat!");
+                continue;
+            }
         }
-        System.out.print(ConsoleColors.RED + "Third Layer: " + ConsoleColors.RESET);
-        String layer3 = scanobject.nextLine();
-        if (layer3.equals("exit")){
-            return 1000;
+
+        while (true){
+            System.out.print(ConsoleColors.RED + "Cheese Layer: " + ConsoleColors.RESET);
+            layer3 = scanobject.nextLine();
+            if (layer3.equals("exit")){
+                return 1000.;
+            }
+            else if (layer3.equals("colby jack") || layer3.equals("cheddar") || layer3.equals("mozzarella")){
+                break;
+            }
+            else{
+                System.out.println("Please choose a cheese!");
+                continue;
+            }
         }
-        System.out.print(ConsoleColors.RED + "Fourth Layer: " + ConsoleColors.RESET);
-        String layer4 = scanobject.nextLine();
-        if (layer4.equals("exit")){
-            return 1000;
+
+        while (true){
+            System.out.print(ConsoleColors.RED + "Sauce Layer: " + ConsoleColors.RESET);
+            layer4 = scanobject.nextLine();
+            if (layer4.equals("exit")){
+                return 1000.;
+            }
+            else if (layer4.equals("ranch dressing") || layer4.equals("mayo") || layer4.equals("guacamole")){
+                break;
+            }
+            else{
+                System.out.println("Please choose a sauce!");
+                continue;
+            }
         }
-        System.out.print(ConsoleColors.RED + "Top Layer: " + ConsoleColors.RESET);
-        String layer5 = scanobject.nextLine();
-        if (layer5.equals("exit")){
-            return 1000;
+
+        while (true){ 
+            System.out.print(ConsoleColors.RED + "Bread Layer: " + ConsoleColors.RESET);
+            layer5 = scanobject.nextLine();
+            if (layer5.equals("exit")){
+                return 1000.;
+            }
+            else if (layer5.equals("white bread") || layer5.equals("rosemary bread") || layer5.equals("wheat bread")) {
+                break;
+            }
+            else {
+                System.out.println("Please choose a bread!");
+                continue;
+            }
         }
 
         try{
-            rating = ratingmap.get(layer1) + ratingmap.get(layer2) + ratingmap.get(layer3) + ratingmap.get(layer4) + ratingmap.get(layer5);
+            price = pricemap.get(layer1) + pricemap.get(layer2) + pricemap.get(layer3) + pricemap.get(layer4) + pricemap.get(layer5);
         }
         catch (Exception e){
             System.out.println(ConsoleColors.YELLOW + "\nHmm.. you might want to double check if your ingredients are correct!" + ConsoleColors.RESET);
             System.out.println("Type " + ConsoleColors.BLUE + "\"build\"" + ConsoleColors.RESET + " to try again.");
         }
 
-        return rating;
+        return price;
     }
 
     //List Ingredients to User
