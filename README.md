@@ -1,2 +1,2 @@
-# AP_project
+# AP Project
 My AP Project for the 2022 AP Computer Science Principles Test
