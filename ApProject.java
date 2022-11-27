@@ -195,6 +195,7 @@ public class ApProject {
 
         try{
             price = pricemap.get(layer1) + pricemap.get(layer2) + pricemap.get(layer3) + pricemap.get(layer4) + pricemap.get(layer5);
+            
         }
         catch (Exception e){
             System.out.println(ConsoleColors.YELLOW + "\nHmm.. you might want to double check if your ingredients are correct!" + ConsoleColors.RESET);
