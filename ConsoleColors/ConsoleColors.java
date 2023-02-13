@@ -1,3 +1,6 @@
+// This ANSI escape sequence package for coloring consoles is derived from
+// https://gist.github.com/spdeepak/9900c17bc6657541dfd162d30d498950
+
 package ConsoleColors;
 public class ConsoleColors {
     // Reset
