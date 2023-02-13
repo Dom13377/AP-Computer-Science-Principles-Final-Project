@@ -4,6 +4,7 @@ import java.util.Map;
 import static java.util.Map.entry;
 import java.util.Scanner;
 import ConsoleColors.ConsoleColors;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ApProject {
     public static void main(String[] args){
@@ -22,9 +23,11 @@ public class ApProject {
         System.out.print(ConsoleColors.RESET + "Type " + ConsoleColors.YELLOW + "\"help\"" + ConsoleColors.RESET + " to see the command list, ");
         System.out.println(ConsoleColors.RESET + "or Type " + ConsoleColors.BLUE + "\"build\"" + ConsoleColors.RESET + " to build a sandwich.\n");
         
-        //Ingredient Array
+        //Ingredient/Drink Arrays
         List<String> raw_ingredients = Arrays.asList("ham", "colby jack", "mozzarella", "cheddar", "white bread", "mayo", "roast beef", "chicken", "wheat bread", "rosemary bread", "ranch dressing", "guacamole");
         String ingredients = String.join(", ", raw_ingredients);
+        List<String> raw_drinks = Arrays.asList("Milk", "Cream Soda", "Sprite", "Water", "Orange Juice");
+        String drinks = String.join(", ", raw_drinks);
         
         //Create Scanner Object
         Scanner scanobject = new Scanner(System.in);
@@ -48,34 +51,45 @@ public class ApProject {
                 System.out.println("Type " + ConsoleColors.YELLOW + "\"help\"" + ConsoleColors.RESET + " to see available commands");
                 System.out.println("Type " + ConsoleColors.YELLOW + "\"list\"" + ConsoleColors.RESET + " to list ingredients");
                 System.out.println("Type " + ConsoleColors.YELLOW + "\"build\"" + ConsoleColors.RESET + " to build a sandwich");
+                System.out.println("Type " + ConsoleColors.YELLOW + "\"drinks\"" + ConsoleColors.RESET + " to select a drink with your sandwich");
                 System.out.println("Type " + ConsoleColors.YELLOW + "\"exit\"" + ConsoleColors.RESET + " to quit the program\n");
+            }
+
+            else if (command.equals("drinks")){
+                String selected_drink = drink_select(drinks, raw_drinks, scanobject);
+                if (selected_drink.equals("exit")){
+                    continue;
+                }
+                else {
+                    System.out.println("You selected " + ConsoleColors.YELLOW + selected_drink + ConsoleColors.RESET + ". Make sure to build a sandwich if you haven\'t already.");
+                }
             }
 
             else if (command.equals("build")){
                 String rating = "";
-                Double price = build_sandwich(ingredients, scanobject);
-                if (price == 1000.){
-                    program_bool = exit(program_bool);
+                Double rate = build_sandwich(ingredients, scanobject);
+                if (rate == 1000.){
+                    continue;
                 }
                 else {
-                    //add price ranges
-                    if (price >= 8.50 && price <= 9.50){
-                        System.out.println("Ah what a robust sandwich! Inexpensive yet tasty!");
+                    //add rating ranges
+                    if (rate >= 8.50 && rate <= 9.50){
+                        System.out.println("\nAh what a robust sandwich! Inexpensive yet tasty!");
                         rating = "7/10";
                     }
-                    else if (price >= 9.51 && price <= 11.50){
+                    else if (rate >= 9.51 && rate <= 11.50){
                         System.out.println("This would be exquisite after a long day of hard work!");
                         rating = "8/10";
                     }
-                    else if (price >= 11.51 && price <= 12.50){
+                    else if (rate >= 11.51 && rate <= 12.50){
                         System.out.println("Delicous!");
                         rating = "8.5/10";
                     }
-                    else if (price >= 12.51 && price <= 13.50){
+                    else if (rate >= 12.51 && rate <= 13.50){
                         System.out.println("Nicely done, this sandwich is obviously expertly crafted!");
                         rating = "9/10";
                     }
-                    else if (price >= 13.51 && price <= 14.50){
+                    else if (rate >= 13.51 && rate <= 14.50){
                         System.out.println("There are no words to describe this masterpiece fit for a King!");
                         rating = "10/10";
                     }
@@ -89,7 +103,51 @@ public class ApProject {
         }
     }
 
-    //Build and Price Sandwich
+    //Drink Selection Function
+    public static String drink_select(String drinks, List<String> raw_drinks, Scanner scanobject){
+        boolean checkvar = true;
+        int randnum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
+        String selected_drink = "";
+        System.out.println(drinks);
+        System.out.println(ConsoleColors.YELLOW + "Choose a drink from the list to enjoy!\n" + ConsoleColors.RESET);
+        while (checkvar == true){
+            System.out.print(ConsoleColors.RED + "Select Drink: " + ConsoleColors.RESET);
+            selected_drink = scanobject.nextLine();
+            //check using ideration if selected_drink value exists in the raw_drinks list
+            correct_val: {
+                for (int i = 0; i < 5; i++){
+                    String indexed_value = raw_drinks.get(i);
+                    if (indexed_value.equals(selected_drink)){
+                        if (randnum == 0){
+                            System.out.println("\nNice Choice!");
+                        }
+                        if (randnum == 1){
+                            System.out.println("\nPersonally I like Apple Juice better...");
+                        }
+                        if (randnum == 2){
+                            System.out.println("\nWow you have great taste!");
+                        }
+                        if (randnum == 3){
+                            System.out.println("\nExcellent Selection!");
+                        }
+                        System.out.print(ConsoleColors.RESET);
+                        checkvar = false;
+                        break correct_val;
+                    }
+                    else if (selected_drink.equals("exit")){
+                        checkvar = false;
+                        selected_drink = "exit";
+                        break correct_val;
+                    }
+                }
+                System.out.println("Invalid Selection!");
+                checkvar = true;
+            }
+        }
+        return selected_drink;
+    }
+
+    //Build and Price Sandwich Function
     public static Double build_sandwich(String ingredients, Scanner scanobject){
         Double price = 0.00;
         Map<String, Double> pricemap = Map.ofEntries(
@@ -118,6 +176,7 @@ public class ApProject {
         String layer4 = null;
         String layer5 = null;
 
+        //prompt user for sandwich layers
         while (true){ 
             System.out.print(ConsoleColors.RED + "Bread Layer: " + ConsoleColors.RESET);
             layer1 = scanobject.nextLine();
