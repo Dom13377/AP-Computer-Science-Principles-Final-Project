@@ -3,6 +3,9 @@ import java.util.List;
 import java.util.Map;
 import static java.util.Map.entry;
 import java.util.Scanner;
+// This ANSI escape sequence package for coloring consoles is derived from
+// https://gist.github.com/spdeepak/9900c17bc6657541dfd162d30d498950
+//Java abstraction or API example
 import ConsoleColors.ConsoleColors;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -33,6 +36,7 @@ public class ApProject {
         Scanner scanobject = new Scanner(System.in);
         
         //Main Loop
+        //utilizes selection
         while (program_bool == true){
             System.out.print(ConsoleColors.RED + "Sandwich Builder>> " + ConsoleColors.RESET);
             String command = scanobject.nextLine();
@@ -47,6 +51,7 @@ public class ApProject {
             }
 
             else if (command.equals("help")){
+                //sequencing to set print order
                 System.out.println("Here are your options:\n");
                 System.out.println("Type " + ConsoleColors.YELLOW + "\"help\"" + ConsoleColors.RESET + " to see available commands");
                 System.out.println("Type " + ConsoleColors.YELLOW + "\"list\"" + ConsoleColors.RESET + " to list ingredients");
@@ -113,7 +118,7 @@ public class ApProject {
         while (checkvar == true){
             System.out.print(ConsoleColors.RED + "Select Drink: " + ConsoleColors.RESET);
             selected_drink = scanobject.nextLine();
-            //check using ideration if selected_drink value exists in the raw_drinks list
+            //check using iteration if selected_drink value exists in the raw_drinks list
             correct_val: {
                 for (int i = 0; i < 5; i++){
                     String indexed_value = raw_drinks.get(i);
