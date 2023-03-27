@@ -110,49 +110,52 @@ public class ApProject {
 
     //Drink Selection Function
     public static String drink_select(String drinks, List<String> raw_drinks, Scanner scanobject){
-        boolean checkvar = true;
         int randnum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
-        String selected_drink = "";
+        String selected_drink = "invalid";
         System.out.println(drinks);
         System.out.println(ConsoleColors.YELLOW + "Choose a drink from the list to enjoy!\n" + ConsoleColors.RESET);
-        while (checkvar == true){
+        while (selected_drink.equals("invalid")){
             System.out.print(ConsoleColors.RED + "Select Drink: " + ConsoleColors.RESET);
             selected_drink = scanobject.nextLine();
             //check using iteration if selected_drink value exists in the raw_drinks list
-            correct_val: {
-                for (int i = 0; i < 5; i++){
-                    String indexed_value = raw_drinks.get(i);
-                    if (indexed_value.equals(selected_drink)){
-                        if (randnum == 0){
-                            System.out.println("\nNice Choice!");
-                        }
-                        if (randnum == 1){
-                            System.out.println("\nPersonally I like Apple Juice better...");
-                        }
-                        if (randnum == 2){
-                            System.out.println("\nWow you have great taste!");
-                        }
-                        if (randnum == 3){
-                            System.out.println("\nExcellent Selection!");
-                        }
-                        System.out.print(ConsoleColors.RESET);
-                        checkvar = false;
-                        break correct_val;
+            selected_drink = drink_select_branch(selected_drink, randnum, raw_drinks);
+        }
+        return selected_drink;
+    }
+
+    public static String drink_select_branch(String selected_drink, int randnum, List<String> raw_drinks){
+        correct_val: {
+            for (int i = 0; i < 5; i++){
+                String indexed_value = raw_drinks.get(i);
+                if (indexed_value.equals(selected_drink)){
+                    if (randnum == 0){
+                        System.out.println("\nNice Choice!");
                     }
-                    else if (selected_drink.equals("exit")){
-                        checkvar = false;
-                        selected_drink = "exit";
-                        break correct_val;
+                    if (randnum == 1){
+                        System.out.println("\nPersonally I like Apple Juice better...");
                     }
+                    if (randnum == 2){
+                        System.out.println("\nWow you have great taste!");
+                    }
+                    if (randnum == 3){
+                        System.out.println("\nExcellent Selection!");
+                    }
+                    System.out.print(ConsoleColors.RESET);
+                    break correct_val;
                 }
-                System.out.println("Invalid Selection!");
-                checkvar = true;
+                else if (selected_drink.equals("exit")){
+                    selected_drink = "exit";
+                    break correct_val;
+                }
             }
+            System.out.println("Invalid Selection!");
+            selected_drink = "invalid";
         }
         return selected_drink;
     }
 
     //Build and Price Sandwich Function
+    //String dictionary of ingredients and their values
     public static Double build_sandwich(String ingredients, Scanner scanobject){
         Double price = 0.00;
         Map<String, Double> pricemap = Map.ofEntries(
@@ -256,7 +259,7 @@ public class ApProject {
                 continue;
             }
         }
-
+        //mathematical operation to determine the overal price/rating of the sandwich built
         try{
             price = pricemap.get(layer1) + pricemap.get(layer2) + pricemap.get(layer3) + pricemap.get(layer4) + pricemap.get(layer5);
             
