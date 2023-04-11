@@ -131,13 +131,13 @@ public class ApProject {
                     if (randnum == 0){
                         System.out.println("\nNice Choice!");
                     }
-                    if (randnum == 1){
+                    else if (randnum == 1){
                         System.out.println("\nPersonally I like Apple Juice better...");
                     }
-                    if (randnum == 2){
+                    else if (randnum == 2){
                         System.out.println("\nWow you have great taste!");
                     }
-                    if (randnum == 3){
+                    else if (randnum == 3){
                         System.out.println("\nExcellent Selection!");
                     }
                     System.out.print(ConsoleColors.RESET);
